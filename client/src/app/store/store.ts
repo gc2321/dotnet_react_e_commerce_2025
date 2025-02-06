@@ -1,14 +1,17 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { counterSlice } from "../../features/contact/counterReducer";
 import { useDispatch, useSelector } from "react-redux";
-
-import { uiSlice } from "../layout/uiSlice";
 import { catalogApi } from "../../features/catalog/catalogApi";
+import { uiSlice } from "../layout/uiSlice";
 import { errorApi } from "../../features/about/errorApi";
 import { basketApi } from "../../features/basket/basketApi";
 import { catalogSlice } from "../../features/catalog/catalogSlice";
 import { accountApi } from "../../features/account/accountApi";
 import { checkoutApi } from "../../features/checkout/checkoutApi";
+import { orderApi } from "../../features/orders/orderApi";
+
+// export function configureTheStore() {
+//     return legacy_createStore(counterReducer)
+// }
 
 export const store = configureStore({
     reducer: {
@@ -17,7 +20,8 @@ export const store = configureStore({
         [basketApi.reducerPath]: basketApi.reducer,
         [accountApi.reducerPath]: accountApi.reducer,
         [checkoutApi.reducerPath]: checkoutApi.reducer,
-        counter: counterSlice.reducer,
+        [orderApi.reducerPath]: orderApi.reducer,
+        //counter: counterSlice.reducer,
         ui: uiSlice.reducer,
         catalog: catalogSlice.reducer
     },
@@ -28,6 +32,7 @@ export const store = configureStore({
             basketApi.middleware,
             accountApi.middleware,
             checkoutApi.middleware,
+            orderApi.middleware
         )
 });
 
